@@ -7,6 +7,26 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<h1 style = "color:red;">Incorrect Credentials!</h1>
+	
+	 <div id="card-title">
+	 <h1 style = "color:red;">Incorrect Credentials!</h1>
+       
+        
+      </div>
 </body>
 </html>
+
+<style>
+#card-title {
+  font-family: "Raleway Thin", sans-serif;
+  letter-spacing: 4px;
+  padding-bottom: 23px;
+  padding-top: 13px;
+  text-align: center;
+}
+
+*{
+ background: #30CB49;
+ 
+}
+</style>

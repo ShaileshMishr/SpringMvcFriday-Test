@@ -33,14 +33,6 @@ public class UserController {
 		
 	}
 	
-//	@RequestMapping(value = "/getProducts", method = RequestMethod.GET)
-//	public ModelAndView getProducts() {
-//		ModelAndView mav1 = new ModelAndView("listProducts");
-//		List<Product> products = pservice.getProducts();
-//		mav1.addObject("allProducts", products);
-//		return mav1;
-//		
-//	}
 	
 	@RequestMapping(value = "/newUsers", method = RequestMethod.GET)
 	public String addUser(Map<String, Object> model) {

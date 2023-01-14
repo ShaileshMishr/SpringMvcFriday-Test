@@ -7,8 +7,6 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<h1> Welcome ${name}!</h1>
-	
-	<a href = "product">Show Product</a>
+<h1 style = "color:red;">** All Fieds Are Required **</h1>
 </body>
 </html>

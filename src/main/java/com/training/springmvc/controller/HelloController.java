@@ -29,9 +29,6 @@ public class HelloController {
 	
 	
 	@Autowired
-	ProductService productService;
-	
-	@Autowired
 	ProductService pservice; 
 	
 	@Autowired
@@ -49,9 +46,11 @@ public class HelloController {
 	@RequestMapping(value = "/processLogin", method = RequestMethod.POST)
 	public ModelAndView displayProduct(ModelMap map, HttpServletRequest request  ,@ModelAttribute("user") User user) {
 		//int userId=Integer.parseInt(request.getParameter("user_id"));
-		String userId="U102";
+		//int userId=user.getUser_id();
+		int userId=1;
 		String userName = request.getParameter("uname");
 		String password = request.getParameter("pwd");
+		
 		if(service.validateUser(userName, password)) {
 			map.addAttribute("name",userName);
 			map.addAttribute("userId",userId);
@@ -59,38 +58,28 @@ public class HelloController {
 			List<Product> products= pservice.getProducts();
 			mav1.addObject("allProducts", products);
 			return mav1;
-}
+			}
+		
+		else if(userName.equals("") || password.equals("") ) {
+			ModelAndView mav2 = new ModelAndView("error");
+			return mav2;
+			
+		}
+		
 else {
-	ModelAndView mav2 = new ModelAndView("product");
-	return mav2;
+	ModelAndView mav3 = new ModelAndView("fail");
+	return mav3;
 	}
 
 	}
 	
-//	@RequestMapping(value="/return", method = RequestMethod.GET)
-//	@ResponseBody
-//	public String returnHelloMethod() {
-//	    return "Hello world!";
-//	}
-//	
 	
 	
+	@RequestMapping(value="/addtocart/{id}/{pname}/{desc}/{price}/{uid}", method = RequestMethod.GET)
+	public String addToCart(ModelMap map, @PathVariable("id") Integer id,@PathVariable("pname") String pname,@PathVariable("desc") String desc,@PathVariable("price") Double price, @PathVariable("uid") int uid, @ModelAttribute("cart") Cart cart, @ModelAttribute("user") User user) {
 		
-	@RequestMapping(value = "/product", method = RequestMethod.GET)
-	public String getProducts(ModelMap map) {
-		//ModelAndView mav = new ModelAndView("listProductss");
-		List<Product> products = productService.getProducts();
-		map.addAttribute("allProducts", products);
-		return "product";
-		
-	}
-	
-	
-	
-	@RequestMapping(value="/addCart/{id}/{name}/{desc}/{price}/{uid}", method = RequestMethod.GET)
-	public String addToCart(ModelMap map, @PathVariable("id") Integer id,@PathVariable("name") String name,@PathVariable("desc") String desc,@PathVariable("price") Double price, @PathVariable("uid") Integer uid, @ModelAttribute("cart") Cart cart) {
 		cart.setProd_id(id);
-		cart.setProd_name(name);
+		cart.setProd_name(pname);
 		cart.setProd_desc(desc);
 		cart.setPrice(price);
 		cart.setUser_id(uid);
@@ -105,19 +94,19 @@ else {
 }
 }
 	
-	@RequestMapping(value = "/processCart", method = RequestMethod.POST)
+	@RequestMapping(value = "/processCart", method = RequestMethod.GET)
 	public ModelAndView displayCart(ModelMap map, HttpServletRequest request  ,@ModelAttribute("cart") Cart cart) {
 		
 		boolean carts=cservice.viewCart(cart);
 		if(carts) {
-			ModelAndView mav3 = new ModelAndView("cart");
-		//	List<Cart> cartss = cservice.viewCart(cart);
-			mav3.addObject("carts", carts);
-			return mav3;
+			ModelAndView mav4 = new ModelAndView("cart");
+			List<Cart> cartss = cservice.getCart(cart);
+			mav4.addObject("cartss", cartss);
+			return mav4;
 }
 else {
-	ModelAndView mav4 = new ModelAndView("cart");
-	return mav4;
+	ModelAndView mav5 = new ModelAndView("cart");
+	return mav5;
 	}
 
 	}

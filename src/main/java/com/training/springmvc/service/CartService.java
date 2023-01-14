@@ -10,16 +10,12 @@ import com.training.springmvc.repository.CartRepository;
 
 @Service
 public interface CartService {
-	public static final CartRepository cartRepository = null;
 
 	boolean createCart(Cart cart);
 
 	boolean viewCart(Cart cart);
 
-	 List<Cart> getCarts(Cart cart) ;
-//		List<Cart> carts = (List<Cart>)cartRepository.findAll();
-//			return carts;
-//		}
+	 List<Cart> getCart(Cart cart) ;
 
-	List<Cart> getCarts();
+//	 public List<Cart> getCartList(int id);
 }
