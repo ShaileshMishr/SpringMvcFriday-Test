@@ -10,6 +10,6 @@ import com.training.springmvc.model.User;
 @Repository
 public interface CartRepository extends JpaRepository<Cart, Integer>{
 
-	//public interface CartRepository extends JpaRepository<User, Integer>{
-	//public User findById(int id);
+	// public interface CartRepository extends JpaRepository<User, Integer>{
+	//public Cart findById(int user_id);
 }

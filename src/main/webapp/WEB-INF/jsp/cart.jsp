@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
+    <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
     
      <!DOCTYPE html>
 <html>
@@ -13,8 +14,8 @@ body {
 .flip-card {
 	
   background-color: transparent;
-  width: 600px;
-  height: 500px;
+  width: 700px;
+  height: 1500px;
   perspective: 1000px;
 border-radius: 8px;
   box-shadow: 1px 2px 8px rgba(0, 0, 0, 0.65);
@@ -78,7 +79,7 @@ border-radius: 8px;
     <div id="card">
     <div id="card-content">
       <div id="card-title">
-      <h1>${name}!</h1>
+      <h1>${uid}</h1>
 		
         <h2>Your Cart Item</h2>
         <div class="underline-title"></div>
@@ -91,7 +92,7 @@ border-radius: 8px;
 			<th class="form-content">Prod_Name</th>
 			<th class="form-content">Prod_Desc</th>
 			<th class="form-content">Price</th>
-			
+			<th class="form-content" >Product Image</th>
 			
 			<c:forEach items="${cartss}" var="cart">
 				<tr class="form-content">
@@ -100,7 +101,7 @@ border-radius: 8px;
 					<td class="form-content">${cart.getProd_name()}</td>
 					<td class="form-content">${cart.getProd_desc()}</td>
 					<td class="form-content">${cart.getPrice()}</td>
-					
+					<td  class="form-content"><img src="${cart.getImage()}" style="width:104px;height:142px;"></td>
 					
 				</tr>
 
@@ -109,8 +110,9 @@ border-radius: 8px;
 	</table>
 	
 	<div id="card-title">
-	<h1><a href = "processLogin"> All Product</a></h1>
-      
+	<!--  <h1><a href = "product">All Product</a></h1> -->
+	 <h2><a href = "home">Home Page</a></h2>
+     
     </div>
     </div>
   </div>

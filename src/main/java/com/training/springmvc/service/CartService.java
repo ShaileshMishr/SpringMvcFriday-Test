@@ -17,5 +17,5 @@ public interface CartService {
 
 	 List<Cart> getCart(Cart cart) ;
 
-//	 public List<Cart> getCartList(int id);
+	// public List<Cart> getCartList(int user_id);
 }

@@ -68,8 +68,8 @@ body {
 .flip-card {
 	
   background-color: transparent;
-  width: 600px;
-  height: 530px;
+  width: 700px;
+  height: 1600px;
   perspective: 1000px;
 border-radius: 8px;
   box-shadow: 1px 2px 8px rgba(0, 0, 0, 0.65);
@@ -134,7 +134,7 @@ border-radius: 8px;
     <div id="card-content">
       <div id="card-title">
       <h1> Welcome ${name}!</h1>
-      <h1>  ${userId}!</h1> 
+      <!-- <h1>  ${userId}!</h1>  -->
 		
         <h2>Product List</h2>
         <div class="underline-title"></div>
@@ -146,6 +146,7 @@ border-radius: 8px;
 			<th class="form-content">Prod_Name</th>
 			<th class="form-content">Prod_Desc</th>
 			<th class="form-content">Price</th>
+			<th class="form-content" >Product Image</th>
 			<th class="form-content" >Action</th>
 			
 			<c:forEach items="${allProducts}" var="product">
@@ -155,6 +156,7 @@ border-radius: 8px;
 					<td class="form-content">${product.getProdName()}</td>
 					<td class="form-content">${product.getProdDesc()}</td>
 					<td class="form-content">${product.getPrice()}</td>
+					<td><img src="${product.getImage()}" style="width:104px;height:142px;"></td>
 					<td class="form-content"><a href = "addtocart/${product.getProdId()}/${product.getProdName()}/${product.getProdDesc()}/${product.getPrice()}/${userId}">ADD To Cart</a>&nbsp
 						
 						</td>
@@ -167,6 +169,7 @@ border-radius: 8px;
 	
 	<div id="card-title">
 	<h1><a href = "processCart">Display Cart</a></h1>
+	 <h2><a href = "home">Home Page</a></h2>
 	<h1 style="color:red">${cartMsg}</h1>
       
     </div>

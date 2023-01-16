@@ -34,12 +34,37 @@ public class HelloController {
 	@Autowired
 	CartService cservice;
 	
-	
 	@RequestMapping(value = "/", method = RequestMethod.GET)
+	public ModelAndView Home() {
+		ModelAndView mav = new ModelAndView("home");
+		mav.addObject("message", "LOGIN PAGE!");
+		//map.addAttribute("message", "LOGIN PAGE!");
+		return mav;
+	}
+	
+	@RequestMapping(value = "/home", method = RequestMethod.GET)
+	public ModelAndView Main() {
+		ModelAndView mav8 = new ModelAndView("home");
+		mav8.addObject("message", "HOME PAGE!");
+		//map.addAttribute("message", "LOGIN PAGE!");
+		return mav8;
+	}
+	
+	
+	@RequestMapping(value = "/login", method = RequestMethod.GET)
 	public ModelAndView displayHello() {
 		ModelAndView mav = new ModelAndView("login");
 		mav.addObject("message", "LOGIN PAGE!");
 		//map.addAttribute("message", "LOGIN PAGE!");
+		return mav;
+	}
+	
+	@RequestMapping(value = "/product", method = RequestMethod.GET)
+	public ModelAndView displayProduct() {
+		ModelAndView mav = new ModelAndView("product");
+		List<Product> products= pservice.getProducts();
+		mav.addObject("allProducts", products);
+
 		return mav;
 	}
 	
@@ -76,16 +101,18 @@ else {
 	
 	
 	@RequestMapping(value="/addtocart/{id}/{pname}/{desc}/{price}/{uid}", method = RequestMethod.GET)
-	public String addToCart(ModelMap map, @PathVariable("id") Integer id,@PathVariable("pname") String pname,@PathVariable("desc") String desc,@PathVariable("price") Double price, @PathVariable("uid") int uid, @ModelAttribute("cart") Cart cart, @ModelAttribute("user") User user) {
+	public String addToCart(ModelMap map ,@PathVariable("id") Integer id,@PathVariable("pname") String pname,@PathVariable("desc") String desc,@PathVariable("price") Double price, @PathVariable("uid") int uid, @ModelAttribute("cart") Cart cart, @ModelAttribute("user") User user) {
 		
 		cart.setProd_id(id);
 		cart.setProd_name(pname);
 		cart.setProd_desc(desc);
 		cart.setPrice(price);
+		
 		cart.setUser_id(uid);
+		
 		if(cservice.createCart(cart)) {
 			map.addAttribute("cartMsg", "Item Added Successfully");
-			return "product";
+			return "sucess";
 	}
 
 	else {
@@ -95,7 +122,8 @@ else {
 }
 	
 	@RequestMapping(value = "/processCart", method = RequestMethod.GET)
-	public ModelAndView displayCart(ModelMap map, HttpServletRequest request  ,@ModelAttribute("cart") Cart cart) {
+	public ModelAndView displayCart(ModelMap map,HttpServletRequest request  ,@ModelAttribute("cart") Cart cart) {
+		
 		
 		boolean carts=cservice.viewCart(cart);
 		if(carts) {
@@ -110,5 +138,22 @@ else {
 	}
 
 	}
-
+	
+//	@RequestMapping(value = "/processCart", method = RequestMethod.GET)
+//	public ModelAndView displayCart(@PathVariable int userId) {
+//		
+//		ModelAndView mav4 = new ModelAndView("cart");
+//		List<Cart> cartss = cservice.getCartList(1);
+//		mav4.addObject("cartss", cartss);
+//
+//		for(Cart cart:cartss) {
+//			System.out.println(cart.getProd_name());
+//		}
+//		return mav4;
+//		
+//
+//	}
+	
+	
+	
 }
