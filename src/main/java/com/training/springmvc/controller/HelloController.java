@@ -19,6 +19,7 @@ import com.training.springmvc.model.User;
 import com.training.springmvc.service.CartService;
 import com.training.springmvc.service.LoginService;
 import com.training.springmvc.service.ProductService;
+import com.training.springmvc.service.UserService;
 
 @Controller
 
@@ -33,6 +34,9 @@ public class HelloController {
 	
 	@Autowired
 	CartService cservice;
+	
+	@Autowired
+	UserService uservice;
 	
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public ModelAndView Home() {
@@ -70,11 +74,11 @@ public class HelloController {
 	
 	@RequestMapping(value = "/processLogin", method = RequestMethod.POST)
 	public ModelAndView displayProduct(ModelMap map, HttpServletRequest request  ,@ModelAttribute("user") User user) {
-		//int userId=Integer.parseInt(request.getParameter("user_id"));
-		//int userId=user.getUser_id();
-		int userId=1;
+		
+		//int userId=1;
 		String userName = request.getParameter("uname");
 		String password = request.getParameter("pwd");
+		int userId=uservice.getUserId(userName, password);
 		
 		if(service.validateUser(userName, password)) {
 			map.addAttribute("name",userName);
@@ -122,7 +126,7 @@ else {
 }
 	
 	@RequestMapping(value = "/processCart", method = RequestMethod.GET)
-	public ModelAndView displayCart(ModelMap map,HttpServletRequest request  ,@ModelAttribute("cart") Cart cart) {
+	public ModelAndView displayCart(ModelMap map  ,@ModelAttribute("cart") Cart cart) {
 		
 		
 		boolean carts=cservice.viewCart(cart);
